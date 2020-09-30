@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MascotaCreateDlg" widgetVar="MascotaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMascotaTitle}">
+            <h:form id="MascotaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mascotaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_idMascota}" for="idMascota" />
+                        <p:inputText id="idMascota" value="#{mascotaController.selected.idMascota}" title="#{bundle.CreateMascotaTitle_idMascota}" required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_idMascota}"/>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{mascotaController.selected.precio}" title="#{bundle.CreateMascotaTitle_precio}" required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_precio}"/>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_animal}" for="animal" />
+                        <p:inputText id="animal" value="#{mascotaController.selected.animal}" title="#{bundle.CreateMascotaTitle_animal}" required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_animal}"/>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_comida}" for="comida" />
+                        <p:inputText id="comida" value="#{mascotaController.selected.comida}" title="#{bundle.CreateMascotaTitle_comida}" required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_comida}"/>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_disponibilidad}" for="disponibilidad" />
+                        <p:inputText id="disponibilidad" value="#{mascotaController.selected.disponibilidad}" title="#{bundle.CreateMascotaTitle_disponibilidad}" required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_disponibilidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mascotaController.create}" value="#{bundle.Save}" update="display,:MascotaListForm:datalist,:growl" oncomplete="handleSubmit(args,'MascotaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MascotaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

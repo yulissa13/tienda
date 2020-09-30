@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VendedorCreateDlg" widgetVar="VendedorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVendedorTitle}">
+            <h:form id="VendedorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vendedorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVendedorLabel_idVendedor}" for="idVendedor" />
+                        <p:inputText id="idVendedor" value="#{vendedorController.selected.idVendedor}" title="#{bundle.CreateVendedorTitle_idVendedor}" required="true" requiredMessage="#{bundle.CreateVendedorRequiredMessage_idVendedor}"/>
+                        <p:outputLabel value="#{bundle.CreateVendedorLabel_user}" for="user" />
+                        <p:inputText id="user" value="#{vendedorController.selected.user}" title="#{bundle.CreateVendedorTitle_user}" required="true" requiredMessage="#{bundle.CreateVendedorRequiredMessage_user}"/>
+                        <p:outputLabel value="#{bundle.CreateVendedorLabel_pass}" for="pass" />
+                        <p:inputText id="pass" value="#{vendedorController.selected.pass}" title="#{bundle.CreateVendedorTitle_pass}" required="true" requiredMessage="#{bundle.CreateVendedorRequiredMessage_pass}"/>
+                        <p:outputLabel value="#{bundle.CreateVendedorLabel_rol}" for="rol" />
+                        <p:inputText id="rol" value="#{vendedorController.selected.rol}" title="#{bundle.CreateVendedorTitle_rol}" required="true" requiredMessage="#{bundle.CreateVendedorRequiredMessage_rol}"/>
+                        <p:outputLabel value="#{bundle.CreateVendedorLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{vendedorController.selected.telefono}" title="#{bundle.CreateVendedorTitle_telefono}" required="true" requiredMessage="#{bundle.CreateVendedorRequiredMessage_telefono}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vendedorController.create}" value="#{bundle.Save}" update="display,:VendedorListForm:datalist,:growl" oncomplete="handleSubmit(args,'VendedorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VendedorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

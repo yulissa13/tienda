@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VendedorViewDlg" widgetVar="VendedorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVendedorTitle}">
+            <h:form id="VendedorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vendedorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVendedorLabel_idVendedor}"/>
+                        <h:outputText value="#{vendedorController.selected.idVendedor}" title="#{bundle.ViewVendedorTitle_idVendedor}"/>
+                        <h:outputText value="#{bundle.ViewVendedorLabel_user}"/>
+                        <h:outputText value="#{vendedorController.selected.user}" title="#{bundle.ViewVendedorTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewVendedorLabel_pass}"/>
+                        <h:outputText value="#{vendedorController.selected.pass}" title="#{bundle.ViewVendedorTitle_pass}"/>
+                        <h:outputText value="#{bundle.ViewVendedorLabel_rol}"/>
+                        <h:outputText value="#{vendedorController.selected.rol}" title="#{bundle.ViewVendedorTitle_rol}"/>
+                        <h:outputText value="#{bundle.ViewVendedorLabel_telefono}"/>
+                        <h:outputText value="#{vendedorController.selected.telefono}" title="#{bundle.ViewVendedorTitle_telefono}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VendedorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

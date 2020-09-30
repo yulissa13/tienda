@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FacturaEditDlg" widgetVar="FacturaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFacturaTitle}">
+            <h:form id="FacturaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{facturaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_idFactura}" for="idFactura" />
+                        <p:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.EditFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_idFactura}"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{facturaController.selected.fecha}" title="#{bundle.EditFacturaTitle_fecha}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_fkCliente}" for="fkCliente" />
+                        <p:selectOneMenu id="fkCliente" value="#{facturaController.selected.fkCliente}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fkCliente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="fkClienteItem"
+                                           itemValue="#{fkClienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_fkIdMascota}" for="fkIdMascota" />
+                        <p:selectOneMenu id="fkIdMascota" value="#{facturaController.selected.fkIdMascota}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fkIdMascota}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mascotaController.itemsAvailableSelectOne}"
+                                           var="fkIdMascotaItem"
+                                           itemValue="#{fkIdMascotaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturaLabel_fkVendedor}" for="fkVendedor" />
+                        <p:selectOneMenu id="fkVendedor" value="#{facturaController.selected.fkVendedor}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_fkVendedor}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vendedorController.itemsAvailableSelectOne}"
+                                           var="fkVendedorItem"
+                                           itemValue="#{fkVendedorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{facturaController.update}" value="#{bundle.Save}" update="display,:FacturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacturaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FacturaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
